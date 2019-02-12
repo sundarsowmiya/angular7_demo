@@ -1,0 +1,58 @@
+<div class="wrapper">
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left-side-menu">
+        <div class="slimscroll-menu">
+            <!-- LOGO -->
+            <a href="" class="logo text-center"> <span class="logo-lg custom-height">
+                            <img src="assets/images/logo_scb.png" alt="" height="53">
+                        </span>
+                <span class="logo-sm custom-height">
+                            <img src="assets/images/logo_scb.png" alt="" height="25">
+                        </span>
+            </a>
+            <!--- Sidemenu -->
+            <app-side-menu></app-side-menu>
+            <!-- End Sidebar -->
+            <div class="clearfix"></div>
+        </div>
+        <!-- Sidebar -left -->
+    </div>
+
+    
+    <div class="content-page">
+        <div class="content">
+            <!-- Topbar Start -->
+            <app-header-nav></app-header-nav>
+            <!-- end Topbar -->
+            <!-- Start Content-->
+            <div class="container-fluid">
+                    <!--<div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right"></div>
+                                    <h4 class="page-title">{{pageTitle}}</h4>
+                                </div>
+                            </div>
+                        </div>-->
+               <router-outlet></router-outlet> 
+             </div>
+            <!-- container -->
+        </div>
+        <!-- content -->
+        <!-- Footer Start -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">2019 © SCB - Digital.com</div>
+                </div>
+            </div>
+        </footer>
+        <!-- end Footer -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+</div>
+<!-- END wrapper -->
+<!-- Right Sidebar -->
+<app-sidebar></app-sidebar>

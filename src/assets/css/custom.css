@@ -1,0 +1,16 @@
+.content-page {
+    margin-left: 0;
+}
+.navbar-custom{
+    background-color: #004b88;
+}
+.app-title{
+    padding: 25px 0;
+    color: #fff;
+}
+.app-logo img{    
+    width: 100%;
+    height: 100%;
+    padding: 15px 0;
+
+}
