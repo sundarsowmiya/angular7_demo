@@ -46,8 +46,7 @@
               "src/assets/js/vendor/buttons.flash.min.js",
               "src/assets/js/vendor/buttons.print.min.js",
               "src/assets/js/vendor/dataTables.keyTable.min.js",
-              "src/assets/js/vendor/dataTables.select.min.js",
-              "src/assets/js/pages/demo.datatable-init.js"
+              "src/assets/js/vendor/dataTables.select.min.js"
             ],
             "es5BrowserSupport": true
           },
