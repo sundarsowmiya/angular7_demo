@@ -7,23 +7,26 @@ import { ResourcesComponent } from './dashboard/resources/resources.component';
 import { AddResourcesComponent } from './dashboard/resources/add-resources/add-resources.component';
 import {NeedAuthGuard} from './auth.guard';
 import {RoleGuard} from './role.guard';
-
+//import { SuperRoleGuard } from './super.role.guard'
+import { EditResourcesComponent } from './dashboard/resources/edit-resources/edit-resources.component';
+import { DeleteResourcesComponent } from './dashboard/resources/delete-resources/delete-resources.component';
 
 const routes: Routes = [ 
 	{path:'login',component:LoginComponent},
-	
 	{path:"", redirectTo: '/login', pathMatch: 'full'},
+	{path:"index", redirectTo: '/login', pathMatch: 'full'},
 	{path:'dashboard', component:DashboardComponent,
-	//canActivate: [NeedAuthGuard, RoleGuard],
+	canActivate: [NeedAuthGuard, RoleGuard],
 	children:[
-		{path:'', component:DashboardReportsComponent, data: { title: 'Manage Associates' } },
+		{path:'', component:DashboardReportsComponent},
 		{ path:'resources', component: ResourcesComponent, 
 		children:[
-			{ path:'add-app', component:AddResourcesComponent }
-			//{path:'edit-app/:id',component:EditAssociatesComponent},
-			//{path:'delete-app/:id',component:DeleteAssociatesComponent}
+			{ path:'add-app', component:AddResourcesComponent },
+			{path:'edit-resources/:id',component:EditResourcesComponent},
+			{path:'delete-resources/:id',component:DeleteResourcesComponent}
 		]},
 	]},
+	
 ];
 
 @NgModule({

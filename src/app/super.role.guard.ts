@@ -21,15 +21,15 @@ export class SuperRoleGuard implements CanActivate {
         const redirectUrl = route['_routerState']['url'];
 
         return this._roleGuard.canActivate(route, state).then((auth) => {
-            console.log(this.accountService.isSuper())
+           // console.log(this.accountService.isSuper())
             if(this.accountService.isSuper()) {
-                alert("Super admin")
+              
                return Promise.resolve(true);
             }else {
                 alert("normal admin")
                 this.router.navigateByUrl(
                     this.router.createUrlTree(
-                      ['/dashboard/manage-associates']
+                      ['/login']
                     )
                   );
             }         

@@ -15,56 +15,27 @@ export class NeedAuthGuard implements CanActivate {
     }
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-        const redirectUrl = next['_routerState']['url'];
+       // const redirectUrl = next['_routerState']['url'];
 
         return new Promise((resolve: Function, reject: Function) => {
             if (this.accountService.isLogged()) {
-                resolve(true);
+               
+                resolve(true)
             } else {
-                resolve(false);
+                
+                resolve(false)
                 this.router.navigateByUrl(
                     this.router.createUrlTree(
                       ['/login'], {
-                        queryParams: {
-                          redirectUrl
-                        }
+                        // queryParams: {
+                        //   redirectUrl
+                        // }
                       }
                     )
                   );
             }
         });
     }
-    // canActivate(route:ActivatedRouteSnapshot, state:RouterStateSnapshot): Promise<boolean>{
-    //     const redirectUrl = route['_routerState']['url'];
-
-    //     // return new Promise((resolve) => {
-    //     //     this.accountService.isLogged()
-    //     //       .then(function (user) {
-    //     //         console.log('home auth', user)
-    //     //         this.router.navigate(['/dashboard']);
-    //     //         resolve(false);
-    //     //       })
-    //     //       .catch(function () {
-    //     //         resolve(true);
-    //     //       });
-    //     //     });
-    //     this.router.navigate(['/login']);
-    //     resolve(false);
-
-    //     // if(this.accountService.isLogged()){
-    //     //    return true;
-    //     // }
-        // this.router.navigateByUrl(
-        //     this.router.createUrlTree(
-        //       ['/login'], {
-        //         queryParams: {
-        //           redirectUrl
-        //         }
-        //       }
-        //     )
-        //   );
-      
-    //     //   return false;
-    // }
+   
 
 }

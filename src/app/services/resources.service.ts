@@ -18,13 +18,31 @@ const httpHeaders={
 
 export class ResourcesService{
     resourcesAPIurl: any = config.gServiceUrl+"/user/create";
-
+    resourcesAPIurlDelete: any = config.gServiceUrl+"/user/delete";
+    resourcesAPIurlGet: any = config.gServiceUrl+"/user";
+    resourcesAPIurlEdit: any = config.gServiceUrl+"/user/editUser";
+   // http://localhost:8102/user/editUser 
+   //http://localhost:8102/user/delete/5c5d60341a6a3837b84685ce 
     constructor(private http: HttpClient) { }
 
     addresouces(data): Observable<ResourcesTypes[]>{
-      //  console.log(this.associatesAPIurl, data, httpHeaders);
         return this.http.post<ResourcesTypes[]>(this.resourcesAPIurl, data, httpHeaders)  
     }
-
-
+    
+    deleteresources(id:number): Observable<ResourcesTypes[]>{
+        return this.http.delete<ResourcesTypes[]>(this.resourcesAPIurlDelete+"/"+id, httpHeaders);
+    }
+  
+    getResources(id:number): Observable<ResourcesTypes[]>{
+        //console.log(id);
+        //console.log(this.resourcesAPIurlGet);
+        return this.http.get<ResourcesTypes[]>(this.resourcesAPIurlGet+"/"+id, httpHeaders);
+    }
+    
+    
+    editResources(data,id:number): Observable<ResourcesTypes[]>{
+        console.log(id);
+        console.log(data);
+        return this.http.put<ResourcesTypes[]>(this.resourcesAPIurlEdit, data, httpHeaders)  
+    }
 }

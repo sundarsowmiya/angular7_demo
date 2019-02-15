@@ -23,10 +23,10 @@ export class RoleGuard implements CanActivate {
         return this._authGuard.canActivate(route, state).then((auth) => {
             console.log(this.accountService.isAdmin())
             if(this.accountService.isAdmin()) {
-                alert("admins");   
+                
                return Promise.resolve(true);
             }else {
-                alert("Not a admins");           
+                alert("Not a admins")         
                 this.router.navigateByUrl(
                     this.router.createUrlTree(
                       ['/login'], {
@@ -36,7 +36,7 @@ export class RoleGuard implements CanActivate {
                       }
                     )
                   );
-                  return Promise.resolve(false);
+                return Promise.resolve(false);
             }         
          //   return Promise.resolve(false)
         });

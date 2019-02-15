@@ -1,0 +1,25 @@
+<div class="modal-backdrop fade in" ></div>
+<div style="display: block;overflow: auto;opacity: 1;" class="modal fade in" id="" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="padding-top:120px;">
+        <div class="modal-content">
+            <form [formGroup]="DeleteResourcesForm" (ngSubmit)="deleteResources(f)" #f>
+                <!-- <div id="oppoupdate-events.oppurid" class="alert alert-success alert-style" style="display:none;">
+                    <h5>Updated Successfully. </h5>
+                </div> -->
+                <div class="modal-header">
+                    <h3 class="modal-title"><i class="mdi mdi-delete"></i> Delete Resources</h3>
+                    <button type="button" (click)="backClicked()" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="backClicked()" class="btn default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary modal-event">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

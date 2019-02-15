@@ -7,7 +7,6 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 ]
 })
 export class DashboardComponent implements OnInit {
-  pageTitle='Dashboard'
   loadAPI: Promise<any>;
   constructor() {
   this.loadAPI = new Promise((resolve) => {
@@ -26,15 +25,14 @@ export class DashboardComponent implements OnInit {
 
     if (!isFound) {
         var dynamicScripts = [
-       
+           
           "../../assets/js/vendor/Chart.bundle.min.js",
           "../../assets/js/vendor/jquery-jvectormap-1.2.2.min.js",
           "../../assets/js/vendor/jquery-jvectormap-world-mill-en.js",
           "../../assets/js/pages/demo.dashboard.js",
           "../../assets/js/vendor/d3.min.js",
           "../../assets/js/vendor/britecharts.min.js",
-          "../../assets/js/pages/demo.britechart.js",
-          
+          "../../assets/js/pages/demo.britechart.js"
       ];
 
         for (var i = 0; i < dynamicScripts .length; i++) {

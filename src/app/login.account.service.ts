@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 
 const code = 'code';
 const role = 'role';
-const CONNECT_ID = 'CONNECT_ID';
+const resourceID = 'resourceID';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +10,13 @@ const CONNECT_ID = 'CONNECT_ID';
 export class AccountService {
 
   setToken(token: any): void { 
-    console.log(token[0].code)
-  localStorage.setItem(code, token[0].code)
+   // console.log(token.code) ;
+  localStorage.setItem(code, token.code)
   
-    if(token[0].role){
-      localStorage.setItem(role, token[0].role);
-      localStorage.setItem(CONNECT_ID, token[0].accountDt.connectid);
+    if(token.role){
+      //console.log(token.role);
+      localStorage.setItem(role, token.role);
+      localStorage.setItem(resourceID, token.resourceID);
     }
     
   }

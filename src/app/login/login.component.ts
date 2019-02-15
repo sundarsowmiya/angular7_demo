@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 
 import {LoginService} from '../services/login.service';
 import {AccountService} from '../login.account.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,11 +14,14 @@ export class LoginComponent implements OnInit {
     loginControlForm: FormGroup;
     userName;
     password;
+    
+    toastmsg: any[] = [];
     token:null;
     constructor(fb: FormBuilder, 
       private router:Router,
       private loginService:LoginService,
-      private accountService:AccountService) {
+      private accountService:AccountService,
+      private toastr: ToastrService) {
         this.loginControlForm = fb.group({
         userName:["", Validators.required],
         password:["", Validators.required]
@@ -30,11 +33,17 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
    loginAccount(){
-    // this.loginService.loginCheck(this.loginControlForm.value).subscribe((response)=>{
-    
-    // this.accountService.setToken(response);
-     this.router.navigateByUrl("/dashboard");
-   // }); 
+     this.loginService.loginCheck(this.loginControlForm.value).subscribe(
+       (response:any)=>{
+console.log(response.code);
+      if (response.code == 'LG004' || response.code== "" || response.code== null) {
+        this.toastr.error('Failure Invalid username');
+    } else {
+      this.accountService.setToken(response);
+      this.router.navigateByUrl("/dashboard");
+      this.toastr.info('Welcome to TnC Dashboard Reports.');
+    }
+   }); 
    }
 
 }

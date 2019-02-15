@@ -1,203 +1,280 @@
 <div class="modal fade" id="add-new-task-modal" tabindex="-1" role="dialog" aria-labelledby="NewTaskModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                    
-                <div class="modal-content"> 
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="NewTaskModalLabel">Create New Resources </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    </div>
-                    <form [formGroup]="addResoucesForm" (ngSubmit)="addresouces(f)" #f>
-                    <div class="modal-body">
-                      <div class="row">
-                            <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="domain">Domain</label>
-                                        <select class="form-control" id="domain"  formControlName="domain" name="domain">
-                                                <option value="" disabled>Choose a Domain</option>
-                                            <option *ngFor="let domain of domainList; let i = index;" [value]="domain">
-                                           {{domain}}</option>
-                                           
-                                        </select>
-                                        <div class="alert alert-danger" 
-                                        *ngIf="domain.touched && domain.invalid">
-                                        <div *ngIf="domain.errors.required"> Resource Skill  is Required</div>
-                                        <div *ngIf="domain.errors.pattern">Resource Skill be Alphabet</div>
-                                      </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="bankId">Resource ID</label><span style="color: red">*</span>
-                                        <input  type="text" formControlName="bankId" class="form-control" name="bankId" id="bankId" placeholder="Enter Bank ID" required />
-                                            <div class="alert alert-danger" *ngIf="bankId.touched && bankId.invalid">
-                                            <div *ngIf="bankId.errors.required"> Resource ID Required</div>
-                                          </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="resourceName">Resource Name </label>
-                                        <input type="text" class="form-control"  formControlName="resourceName" id="resourceName" name="resourceName" placeholder="Enter Name" required />
-                                        <div class="alert alert-danger" 
-                                            *ngIf="resourceName.touched && resourceName.invalid">
-                                            <div *ngIf="resourceName.errors.required"> Resource Name  Required</div>
-                                          </div>
-                                    </div>
-                                </div>
-                             
-
-                            </div>
-                            
-                            <!-- <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="businessTitle">Application Name </label>
-                                        <input type="text" class="form-control" formControlName="businessTitle" id="businessTitle" name="businessTitle" placeholder="Enter Business Title" required />
-                                        <div class="alert alert-danger" 
-                                            *ngIf="businessTitle.touched && businessTitle.invalid">
-                                            <div *ngIf="businessTitle.errors.required">Application Name Required</div>
-                                          </div>
-                                    </div>
-                                </div> -->
-
-                             <div class="row">
-                                    <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="name">Application Name </label><span style="color: red">*</span>
-                                                <select class="form-control" formControlName="applicationName" name="applicationName"  required >
-                                                        <option value="" disabled>Choose a Application Name </option> 
-                                                  <option *ngFor="let applicationName of applicationNameList; let i = index" [value]="applicationName">{{applicationName}}</option>
-                                                   
-                                                </select>
-                                               <div class="alert alert-danger"*ngIf="applicationName.touched && applicationName.invalid">
-                                                <div *ngIf="applicationName.errors.required">Department is Required</div>
-                                            </div>
-        
-                                            </div>
-                                        </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="name">Department</label><span style="color: red">*</span>
-                                        <select class="form-control" formControlName="department" name="department"  required >
-                                                <option value="" disabled>Choose a Department</option> 
-                                          <option *ngFor="let department of departmentList; let i = index" [value]="department">{{department}}</option>
-                                           
-                                        </select>
-                                       <div class="alert alert-danger"*ngIf="department.touched && department.invalid">
-                                        <div *ngIf="department.errors.required">Department is Required</div>
-                                    </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="Empstatus">Employent Status</label>
-                                        <select class="form-control" formControlName="Empstatus" id="Empstatus" required>
-                                                <option value="" disabled>Choose a Employent Status</option>  
-                                            <option *ngFor="let Empstatus of Status; let i = index" [value]="Empstatus">
-                                                {{Empstatus}}
-                                            </option>
-                                         </select>
-                                        <div class="alert alert-danger" 
-                                        *ngIf="Empstatus.touched && Empstatus.invalid">
-                                        <div *ngIf="Empstatus.errors.required"> Employent Status is Required</div>
-                                        
-                                      </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="ResourceSkill">Resource Skill</label>
-                                        <select class="form-control"  formControlName="ResourceSkill" id="ResourceSkill" required>
-                                                <option value="" disabled>Choose a Resource Skill</option>                     <option *ngFor="let ResourceSkill of resourceskillList; let i = index" [value]="ResourceSkill">
-                                            {{ResourceSkill}}
-                                             </option>
-                                        </select>
-                                        <div class="alert alert-danger" 
-                                        *ngIf="ResourceSkill.touched && ResourceSkill.invalid">
-                                        <div *ngIf="ResourceSkill.errors.required"> Resource Skill  is Required</div>
+    <div class="modal-dialog modal-full-width modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="NewTaskModalLabel">Create New Resources </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <form [formGroup]="addResoucesForm" (ngSubmit)="addresouces(f)" #f>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="domain">Domain</label>
+                                <select class="form-control" id="domain" formControlName="domain" name="domain">
+                                    <option value="" disabled>Choose a Domain</option>
+                                    <option *ngFor="let domain of domainList; let i = index;" [value]="domain">{{domain}}</option>
+                                </select>
+                                <div class="alert alert-danger" *ngIf="domain.touched && domain.invalid">
+                                    <div *ngIf="domain.errors.required">Domain is Required</div>
                                     
-                                      </div>
-                                    </div>
                                 </div>
-
                             </div>
-                            <div class="row">
-                                
-                                <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="gender">Location</label>
-                                            <select class="form-control" id="gender" formControlName="gender" name="location">
-                                                    <option value="" disabled>Choose a Location</option>
-
-                                                <option *ngFor="let location of locationList; let i = index;" [value]="location">
-                                               {{location}}</option>
-                                              </select>
-                                            <div class="alert alert-danger" 
-                                            *ngIf="location.touched && location.invalid">
-                                            <div *ngIf="location.errors.required"> Resource Skill  is Required</div>
-                                            <div *ngIf="location.errors.pattern">Resource Skill be Alphabet</div>
-                                          </div>
-                                        </div>
-                                    </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="gender">Gender</label>
-                                        <select class="form-control" id="gender" formControlName="gender" name="gender">
-                                                <option value="" disabled>Choose a Gender</option>
-                                            <option *ngFor="let gender of genderList; let i = index;" [value]="gender">
-                                           {{gender}}</option>
-                                           
-                                        </select>
-                                        <div class="alert alert-danger" 
-                                        *ngIf="gender.touched && gender.invalid">
-                                        <div *ngIf="gender.errors.required"> Resource Skill  is Required</div>
-                                        <div *ngIf="gender.errors.pattern">Resource Skill be Alphabet</div>
-                                      </div>
-                                    </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="resourceID">Resource ID</label><span style="color: red">*</span>
+                                <input type="text" formControlName="resourceID" class="form-control" name="resourceID" id="resourceID" placeholder="Enter Resource ID" required />
+                                <div class="alert alert-danger" *ngIf="resourceID.touched && resourceID.invalid">
+                                    <div *ngIf="resourceID.errors.required">Resource ID Required</div>
                                 </div>
-
-                            
-
-                               
-
                             </div>
-                            <div class="row">
-                            
-                                <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="nationality">Nationality</label>
-                                            <select class="form-control" id="nationality"  formControlName="nationality" name="nationality">
-                                                    <option value="" disabled>Choose a Nationality</option>
-                                                <option *ngFor="let nationality of nationalityList; let i = index;" [value]="nationality">
-                                               {{nationality}}</option>
-                                               
-                                            </select>
-                                            <div class="alert alert-danger" 
-                                            *ngIf="nationality.touched && nationality.invalid">
-                                            <div *ngIf="nationality.errors.required"> Resource Skill  is Required</div>
-                                            <div *ngIf="nationality.errors.pattern">Resource Skill be Alphabet</div>
-                                          </div>
-                                        </div>
-                                    </div>
-
-
-                            </div> 
-                                 <div class="text-right">
-                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button> &nbsp;
-                                <button type="button" [disabled]="addResoucesForm.invalid" type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="resourceName">Resource Name</label>
+                                <input type="text" class="form-control" formControlName="resourceName" id="resourceName" name="resourceName" placeholder="Enter Name" required />
+                                <div class="alert alert-danger" *ngIf="resourceName.touched && resourceName.invalid">
+                                    <div *ngIf="resourceName.errors.required">Resource Name Required</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="name">Application Name</label><span style="color: red">*</span>
+                                <select class="form-control" formControlName="applicationName" name="applicationName" required>
+                                    <option value="" disabled>Choose a Application Name</option>
+                                    <option *ngFor="let applicationName of applicationNameList; let i = index" [value]="applicationName">{{applicationName}}</option>
+                                </select>
+                                <div class="alert alert-danger" *ngIf="applicationName.touched && applicationName.invalid">
+                                    <div *ngIf="applicationName.errors.required">Department is Required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select class="form-control" id="gender" formControlName="gender" name="gender">
+                                    <option value="" disabled>Choose a Gender</option>
+                                    <option *ngFor="let gender of genderList; let i = index;" [value]="gender">{{gender}}</option>
+                                </select>
+                                <div class="alert alert-danger" *ngIf="gender.touched && gender.invalid">
+                                    <div *ngIf="gender.errors.required">Resource Skill is Required</div>
+                                    <div *ngIf="gender.errors.pattern">Resource Skill be Alphabet</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="employmentType">Employent Type</label>
+                                <select class="form-control" formControlName="employmentType" id="employmentType" required>
+                                    <option value="" disabled>Choose a Employent Type</option>
+                                    <option *ngFor="let employmentType of Status; let i = index" [value]="employmentType">{{employmentType}}</option>
+                                </select>
+                                <div class="alert alert-danger" *ngIf="employmentType.touched && employmentType.invalid">
+                                    <div *ngIf="employmentType.errors.required">Employent Status is Required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="name">Retain / Release</label>
+                                <select class="form-control" formControlName="retainRelease" id="retainRelease" name="retainRelease" required>
+                                    <option value="" disabled>Choose a Employent Retain</option>
+                                    <option *ngFor="let retainRelease of retainList; let i = index" [value]="retainRelease">{{retainRelease}}</option>
+                                </select>
+                                <div class="alert alert-danger" *ngIf="retainRelease.touched && retainRelease.invalid">
+                                    <div *ngIf="retainRelease.errors.required">Employent Status is Required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="name">Resource Class</label>
+                                <select class="form-control" formControlName="resourceClass" id="resourceClass" name="resourceClass" required>
+                                    <option value="" disabled>Choose a Employent Retain</option>
+                                    <option *ngFor="let resourceClass of resourceClassList; let i = index" [value]="resourceClass">{{resourceClass}}</option>
+                                </select>
+                                <div class="alert alert-danger" *ngIf="resourceClass.touched && resourceClass.invalid">
+                                    <div *ngIf="resourceClass.errors.required">Employent Status is Required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                                
+                                <div class="form-group">
+                                        <label for="name">Date Of Hire </label>
+                                        <input  class="form-control"  formControlName="dateOfHire" id="dateOfHire" name="dateOfHire" placeholder="Date Of Hire" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
+                                         <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
+                                         <div class="alert alert-danger" *ngIf="dateOfHire.touched && dateOfHire.invalid">
+                                            <div *ngIf="dateOfHire.errors.required">Date Of Hire is Required</div>
+                                        </div>
+                                </div>
+                                     
+                                    
+                                <!-- <div class="form-group">
+                                        <label for="task-priority">Due Date</label>
+                                        <input type="text" class="form-control form-control-light" id="birthdatepicker" data-toggle="date-picker" data-single-date-picker="true">
+
+                                        
+                                    </div> -->
+                            </div>
+
+
                         
+                    </div>
+                    <div class="row">
+                            <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="role">Role</label>
+                                        <select class="form-control" id="role" formControlName="role" name="role">
+                                            <option value="" disabled>Choose a Role</option>
+                                            <option *ngFor="let role of roleList; let i = index;" [value]="role">{{role}}</option>
+                                        </select>
+                                        <div class="alert alert-danger" *ngIf="role.touched && role.invalid">
+                                            <div *ngIf="role.errors.required">Role is Required</div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="bankId">Resource Manager Bank ID</label><span style="color: red">*</span>
+                                <input type="text" formControlName="resourceManagerBankID" class="form-control" name="resourceManagerBankID" id="resourceManagerBankID" placeholder="Enter Resource Manager Bank ID" required />
+                                <div class="alert alert-danger" *ngIf="resourceManagerBankID.touched && resourceManagerBankID.invalid">
+                                    <div *ngIf="resourceManagerBankID.errors.required">Resource ID Required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="resourceManagerName">Resource Manager Name</label><span style="color: red">*</span>
+                                <input type="text" formControlName="resourceManagerName" class="form-control" name="resourceManagerName" id="resourceManagerName" placeholder="Enter Resource Manager Name" required />
+                                <div class="alert alert-danger" *ngIf="resourceManagerName.touched && resourceManagerName.invalid">
+                                    <div *ngIf="resourceManagerName.errors.required">Resource ID Required</div>
+                                </div>
+                            </div>
+                        </div>
                         
-                    
-                </form>
-                </div><!-- /.modal-content -->
-               
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-        
- 
+                    </div>
+                    <div class="row">
+                            <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="financialDepartment">Financial Department</label><span style="color: red">*</span>
+                                        <input type="text" formControlName="financialDepartment" class="form-control" name="financialDepartment" id="financialDepartment" placeholder="Enter Financial Department" required />
+                                        <div class="alert alert-danger" *ngIf="financialDepartment.touched && financialDepartment.invalid">
+                                            <div *ngIf="financialDepartment.errors.required">Resource ID Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="gender">Location Countery</label>
+                                <select class="form-control" id="country" formControlName="country" name="country">
+                                    <option value="" disabled>Choose a Location Countery</option>
+                                    <option *ngFor="let country of locationCtryList; let i = index;" [value]="country">{{country}}</option>
+                                </select>
+                                <div class="alert alert-danger" *ngIf="country.touched && country.invalid">
+                                    <div *ngIf="country.errors.required">Location Countery is Required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="gender">Location City</label>
+                                <select class="form-control" id="city" formControlName="city" name="city">
+                                    <option value="" disabled>Choose a Location City</option>
+                                    <option *ngFor="let city of locationList; let i = index;" [value]="city">{{city}}</option>
+                                </select>
+                                <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
+                                    <div *ngIf="city.errors.required">Location City is Required</div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="row">
+                            <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="gender">Current Resource Type (2018) (Automation/Functional/SME)</label>
+                                        <select class="form-control" id="currentResourceType" formControlName="currentResourceType" name="currentResourceType">
+                                            <option value="" disabled>Choose a Location</option>
+                                            <option *ngFor="let currentResourceType of CRTypeList; let i = index;" [value]="currentResourceType">{{currentResourceType}}</option>
+                                        </select>
+                                        <div class="alert alert-danger" *ngIf="currentResourceType.touched && currentResourceType.invalid">
+                                            <div *ngIf="currentResourceType.errors.required">Location Detail is Required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="gender">Next year Resource Type (2019) (Automation/Functional/SME)</label>
+                                <select class="form-control" id="nextYearResourceType" formControlName="nextYearResourceType" name="nextYearResourceType">
+                                    <option value="" disabled>Choose a Location</option>
+                                    <option *ngFor="let nextYearResourceType of nextResTypeList; let i = index;" [value]="nextYearResourceType">{{nextYearResourceType}}</option>
+                                </select>
+                                <div class="alert alert-danger" *ngIf="nextYearResourceType.touched && nextYearResourceType.invalid">
+                                    <div *ngIf="nextYearResourceType.errors.required">Location Detail is Required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="gender">Transition Period (Q1/Q2/Q3/Q4'19)</label>
+                                <select class="form-control" id="transitionPeriod" formControlName="transitionPeriod" name="transitionPeriod">
+                                    <option value="" disabled>Choose a Location</option>
+                                    <option *ngFor="let transitionPeriod of tredPeriodList; let i = index;" [value]="transitionPeriod">{{transitionPeriod}}</option>
+                                </select>
+                                <div class="alert alert-danger" *ngIf="transitionPeriod.touched && transitionPeriod.invalid">
+                                    <div *ngIf="transitionPeriod.errors.required">Location Detail is Required</div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <div class="row">
+                            <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="remarks">Remarks</label>
+                                        <textarea type="text" formControlName="remarks" class="form-control" name="remarks" id="remarks" placeholder="Enter Remarks" required></textarea>
+                                    </div>
+                                </div>
+                        <div class="col-md-4 custom-padd-12" >
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="Access">Administrator Access</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio1" formControlName="administratorAccess" name="administratorAccess"  value='Yes' class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio1">Yes</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio2" formControlName="administratorAccess" name="administratorAccess"  value='No' class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio2">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                
+                <div class="text-right">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>&nbsp;
+                    <button type="button" [disabled]="addResoucesForm.invalid" type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

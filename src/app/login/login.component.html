@@ -5,23 +5,24 @@
 				<div class="card">
 					<!-- Logo -->
 					<div class="card-header pt-4 pb-4 text-center">
-						<a href="index-2.html"> <span><img src="assets/images/logo_scb.png" alt="" ></span>
+						<a href="#"> <span><img src="assets/images/logo_scb.png" alt="" ></span>
 						</a>
 					</div>
+					
 					<div class="card-body p-4">
 						<div class="text-center w-75 m-auto">
 							<h4 class="text-dark-50 text-center mt-0 font-weight-bold">Sign In</h4>
-							<p class="text-muted mb-4">Enter your email address and password to access admin panel.</p>
+							<p class="text-muted mb-2">TnC DASHBOARD REPORT.</p>
 						</div>
 						<form [formGroup]="loginControlForm" (ngSubmit)="loginAccount()">
 							<div class="form-group">
 								<label for="login_name">User Name</label><span style="color: red">*</span>
-								<input type="name" class="form-control" id="login_name" formControlName="userName" placeholder="Enter your email" required/>
+								<input type="name" class="form-control" id="login_name" formControlName="userName" placeholder="Enter your Bank Id" required/>
 								<div class="alert alert-danger" *ngIf="userName.touched && userName.invalid">
 									<div *ngIf="userName.errors.required">Please enter Username</div>
 								</div>
 							</div>
-							<div class="form-group"> <a href="" class="text-muted float-right"><small>Forgot your password?</small></a>
+							<div class="form-group"> <a href="" class="text-muted float-right"></a>
 								<label for="password">Password</label><span style="color: red">*</span>
 								<input type="password" class="form-control" id="login_pass" formControlName="password" placeholder="Enter your password" required/>
 								<div class="alert alert-danger" *ngIf="password.touched && password.invalid">
@@ -33,15 +34,16 @@
 							</div>
 						</form>
 					</div>
+					
 					<!-- end card-body -->
 				</div>
-				<!-- end card -->
+				<!-- end card 
 				<div class="row mt-3">
 					<div class="col-12 text-center">
 						<p class="text-muted">Don't have an account? <a href="" class="text-dark ml-1"><b>Sign Up</b></a>
 						</p>
 					</div>
-				</div>
+				</div>-->
 				<!-- end row -->
 			</div>
 			<!-- end col -->
