@@ -15,7 +15,7 @@ export class NeedAuthGuard implements CanActivate {
     }
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-       // const redirectUrl = next['_routerState']['url'];
+        const redirectUrl = next['_routerState']['url'];
 
         return new Promise((resolve: Function, reject: Function) => {
             if (this.accountService.isLogged()) {
@@ -27,9 +27,9 @@ export class NeedAuthGuard implements CanActivate {
                 this.router.navigateByUrl(
                     this.router.createUrlTree(
                       ['/login'], {
-                        // queryParams: {
-                        //   redirectUrl
-                        // }
+                        queryParams: {
+                          redirectUrl
+                        }
                       }
                     )
                   );

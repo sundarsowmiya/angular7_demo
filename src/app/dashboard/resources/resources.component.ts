@@ -13,6 +13,7 @@ import { Router, Route, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { SharedService } from '../../services/shared.service';
 import * as config from '../../../globalConfig';
+import { ResourcesService} from '../../services/resources.service';
 
 @Component({
   selector: 'app-resources',

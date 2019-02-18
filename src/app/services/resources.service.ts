@@ -35,14 +35,14 @@ export class ResourcesService{
   
     getResources(id:number): Observable<ResourcesTypes[]>{
         //console.log(id);
-        //console.log(this.resourcesAPIurlGet);
-        return this.http.get<ResourcesTypes[]>(this.resourcesAPIurlGet+"/"+id, httpHeaders);
+        console.log(this.resourcesAPIurlGet+"/"+id);
+        return this.http.get<ResourcesTypes[]>(this.resourcesAPIurlGet+"/"+id);
     }
     
     
-    editResources(data,id:number): Observable<ResourcesTypes[]>{
-        console.log(id);
-        console.log(data);
+    editResources(data): Observable<ResourcesTypes[]>{
+      //  console.log(id);
+      //  console.log(data);
         return this.http.put<ResourcesTypes[]>(this.resourcesAPIurlEdit, data, httpHeaders)  
     }
 }

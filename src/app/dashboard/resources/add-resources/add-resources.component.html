@@ -1,9 +1,9 @@
-<div class="modal fade" id="add-new-task-modal" tabindex="-1" role="dialog" aria-labelledby="NewTaskModalLabel" aria-hidden="true">
+<div  class="modal fade" id="add-new-task-modal" tabindex="-1" role="dialog" aria-labelledby="NewTaskModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-full-width modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="NewTaskModalLabel">Create New Resources </h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <button type="button" class="close"  data-dismiss="modal" aria-hidden="true" #closeBtn>×</button>
             </div>
             <form [formGroup]="addResoucesForm" (ngSubmit)="addresouces(f)" #f>
                 <div class="modal-body">
@@ -267,7 +267,7 @@
                 
                 
                 <div class="text-right">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>&nbsp;
+                    <button type="button" (click)="backClicked()" class="btn btn-light" data-dismiss="modal">Cancel</button>&nbsp;
                     <button type="button" [disabled]="addResoucesForm.invalid" type="submit" class="btn btn-primary">Create</button>
                 </div>
             </div>

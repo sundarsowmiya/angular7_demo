@@ -11,10 +11,10 @@ import {RoleGuard} from './role.guard';
 import { EditResourcesComponent } from './dashboard/resources/edit-resources/edit-resources.component';
 import { DeleteResourcesComponent } from './dashboard/resources/delete-resources/delete-resources.component';
 
-const routes: Routes = [ 
-	{path:'login',component:LoginComponent},
-	{path:"", redirectTo: '/login', pathMatch: 'full'},
+const routes: Routes = [
+	{path:"", redirectTo: '/login', pathMatch: 'full'},	
 	{path:"index", redirectTo: '/login', pathMatch: 'full'},
+	{path:'login',component:LoginComponent},
 	{path:'dashboard', component:DashboardComponent,
 	canActivate: [NeedAuthGuard, RoleGuard],
 	children:[

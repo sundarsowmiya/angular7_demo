@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import {Location} from '@angular/common';
 
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -13,6 +13,8 @@ import { ResourcesService } from '../../../services/resources.service';
 })
 export class AddResourcesComponent implements OnInit {
   //  dateTime1: Date;
+  @ViewChild('closeBtn') closeBtn: ElementRef;
+  modal;
   addResoucesForm;
   domain;
   resourceID;
@@ -34,7 +36,7 @@ export class AddResourcesComponent implements OnInit {
   transitionPeriod;
   remarks;
   administratorAccess;
-
+  IsmodelShow:any;
    applicationNameList=['SG -Singapore','CH - Chennai','BG - Bangalore'];
    departmentList=['Trde','Cash','Channels'];
    Status=['Permanent','Vendor'];
@@ -48,7 +50,7 @@ export class AddResourcesComponent implements OnInit {
    CRTypeList=['Functional','Automatione'];
    nextResTypeList=['Functional','Automatione'];
    tredPeriodList=[ 'Year','Quarter'];
-   
+  
   constructor(
     private _location: Location, 
     private fb: FormBuilder,
@@ -78,7 +80,7 @@ export class AddResourcesComponent implements OnInit {
        country:["",[Validators.required]],
        administratorAccess:["",[Validators.required]],
     })
-
+  
     this.resourceID = this.addResoucesForm.get('resourceID');
     this.resourceName = this.addResoucesForm.get('resourceName');
     this.employmentType = this.addResoucesForm.get('employmentType');
@@ -110,14 +112,24 @@ export class AddResourcesComponent implements OnInit {
 
     this.resourcesService.addresouces(this.addResoucesForm.value).subscribe(
       (response:any)=> {
+        this.closeModal();
        // console.log(response);
-       this.toastr.info('Record Created Sucessfully.');
-      //  this.backClicked();
+     
+      // this.modal.dismiss();
+     // modal-backdrop fade show
+       //this.backClicked();
         },
       error => console.log(error,"error")
     )
   }
   backClicked() {
     this._location.back();
+    
 }
+private closeModal(): void {
+  this.closeBtn.nativeElement.click();
+  this.toastr.info('Record Created Sucessfully.');
+}
+
+
 }
