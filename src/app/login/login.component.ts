@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
     loginControlForm: FormGroup;
     userName;
     password;
-    
     toastmsg: any[] = [];
     token:null;
     constructor(fb: FormBuilder, 
@@ -35,13 +34,16 @@ export class LoginComponent implements OnInit {
    loginAccount(){
      this.loginService.loginCheck(this.loginControlForm.value).subscribe(
        (response:any)=>{
-console.log(response.code);
-      if (response.code == 'LG004' || response.code== "" || response.code== null) {
-        this.toastr.error('Failure Invalid username');
+      if (response.code == 'LG001') {
+        this.accountService.setToken(response);
+         if(this.accountService.isAdmin()) {
+          this.router.navigateByUrl("/dashboard");
+          this.toastr.info('Welcome to TnC Dashboard Reports.');
+         }else{
+          this.toastr.error('Not a Admin');
+         }
     } else {
-      this.accountService.setToken(response);
-      this.router.navigateByUrl("/dashboard");
-      this.toastr.info('Welcome to TnC Dashboard Reports.');
+      this.toastr.error('Failure Invalid username');
     }
    }); 
    }

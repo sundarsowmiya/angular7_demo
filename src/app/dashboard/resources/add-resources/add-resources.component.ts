@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import {Location} from '@angular/common';
-
+import { Router, Route, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { ResourcesService } from '../../../services/resources.service';
+
 @Component({
   selector: 'app-add-resources',
   templateUrl: './add-resources.component.html',
@@ -38,24 +39,25 @@ export class AddResourcesComponent implements OnInit {
   administratorAccess;
   IsmodelShow:any;
    applicationNameList=['SG -Singapore','CH - Chennai','BG - Bangalore'];
-   departmentList=['Trde','Cash','Channels'];
+   departmentList=['Trade','Cash','Channels'];
    Status=['Permanent','Vendor'];
    resourceClassList=['Automation','Manual'];
    locationCtryList=['KL -Kuala Lumpur','SG -Singapore','CH - Chennai','BG - Bangalore'];
    locationList=['KL -Kuala Lumpur','SG -Singapore','CH - Chennai','BG - Bangalore'];
    genderList=['Male', 'Female'];
-   domainList=['Trde','Cash','Channels'];
+   domainList=['Trade','Cash','Channels'];
    roleList=['Local','Foreigner'];
    retainList=['Retain','Release'];
    CRTypeList=['Functional','Automatione'];
    nextResTypeList=['Functional','Automatione'];
    tredPeriodList=[ 'Year','Quarter'];
-  
+   tData:any;
   constructor(
     private _location: Location, 
     private fb: FormBuilder,
     private http: HttpClient,
     private toastr: ToastrService,
+    private route: ActivatedRoute,
     private resourcesService: ResourcesService) {
 
     this.addResoucesForm = fb.group({
@@ -105,23 +107,25 @@ export class AddResourcesComponent implements OnInit {
 
 
   ngOnInit() {
+    
   }
 
   addresouces(form){
+    
     this.addResoucesForm.value.dateOfHire = this.addResoucesForm.value.dateOfHire.toLocaleDateString();
-
+console.log(this.addResoucesForm.value);
     this.resourcesService.addresouces(this.addResoucesForm.value).subscribe(
       (response:any)=> {
         this.closeModal();
-       // console.log(response);
-     
-      // this.modal.dismiss();
-     // modal-backdrop fade show
-       //this.backClicked();
+        this.fetchTableData();
+       this.backClicked();
         },
       error => console.log(error,"error")
     )
   }
+  fetchTableData(){
+    this.tData = true;
+   }
   backClicked() {
     this._location.back();
     
@@ -129,7 +133,9 @@ export class AddResourcesComponent implements OnInit {
 private closeModal(): void {
   this.closeBtn.nativeElement.click();
   this.toastr.info('Record Created Sucessfully.');
+  $('#datatable-buttons').DataTable().ajax.reload();
 }
+
 
 
 }

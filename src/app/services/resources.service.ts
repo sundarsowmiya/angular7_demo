@@ -41,8 +41,6 @@ export class ResourcesService{
     
     
     editResources(data): Observable<ResourcesTypes[]>{
-      //  console.log(id);
-      //  console.log(data);
         return this.http.put<ResourcesTypes[]>(this.resourcesAPIurlEdit, data, httpHeaders)  
     }
 }

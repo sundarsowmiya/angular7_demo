@@ -26,7 +26,7 @@ export class SuperRoleGuard implements CanActivate {
               
                return Promise.resolve(true);
             }else {
-                alert("normal admin")
+               
                 this.router.navigateByUrl(
                     this.router.createUrlTree(
                       ['/login']

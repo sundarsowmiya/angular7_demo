@@ -10,12 +10,10 @@ const resourceID = 'resourceID';
 export class AccountService {
 
   setToken(token: any): void { 
-   // console.log(token.code) ;
   localStorage.setItem(code, token.code)
-  
-    if(token.role){
-      //console.log(token.role);
-      localStorage.setItem(role, token.role);
+
+    if(token.administratorAccess){
+      localStorage.setItem(role, token.administratorAccess);
       localStorage.setItem(resourceID, token.resourceID);
     }
     
@@ -26,7 +24,7 @@ export class AccountService {
   }
 
   isAdmin(){
-    return (localStorage.getItem("role") == "Admin" || localStorage.getItem("role") == "SUPER") ? true : false;
+    return (localStorage.getItem("role") == "Yes" || localStorage.getItem("role") == "SUPER") ? true : false;
   }
 
   isSuper(){

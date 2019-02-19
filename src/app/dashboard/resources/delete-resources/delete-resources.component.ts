@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ResourcesService} from '../../../services/resources.service';
 import { ToastrService } from 'ngx-toastr';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-delete-resources',
   templateUrl: './delete-resources.component.html',
@@ -11,18 +13,23 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DeleteResourcesComponent implements OnInit {
   DeleteResourcesForm;
+  dtOptions;
+  dataTable:any;
   constructor(
     private _location: Location, 
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private router: Router,
+    private http: HttpClient,
     private resourcesService: ResourcesService, f: FormBuilder) { 
 
       this.DeleteResourcesForm=f.group({
       });
     }
-
+  
   ngOnInit() {
+
+    
   }
 
   deleteResources(){
@@ -32,10 +39,9 @@ export class DeleteResourcesComponent implements OnInit {
           this.toastr.error('Failure to Delet.');
        }
        else {
-        //this.backClicked();
-        this.router.navigate(['/dashboard/resources']);
+        this.backClicked();
         this.toastr.info('Record Deleted.');
-       
+       $('#datatable-buttons').DataTable().ajax.reload();
        }
         
       },

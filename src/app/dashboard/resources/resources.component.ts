@@ -14,7 +14,7 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { SharedService } from '../../services/shared.service';
 import * as config from '../../../globalConfig';
 import { ResourcesService} from '../../services/resources.service';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-resources',
   templateUrl: './resources.component.html',
@@ -23,15 +23,20 @@ import { ResourcesService} from '../../services/resources.service';
  ]
 })
 export class ResourcesComponent implements  OnInit {
+  // dataTable: any;
 dtOptions: DataTables.Settings = {};
    constructor(private route: ActivatedRoute,
     private router: Router,
     private renderer: Renderer,
-    private sharedService: SharedService,
+    private sharedService: SharedService,private http: HttpClient,
     private fb: FormBuilder) {
      }
      
   ngOnInit() {
+    
+    // const table: any = $('table');
+    // this.dataTable = table.DataTable();
+
     this.renderDatatable();
     this.sharedService.currentData.subscribe((data) => {
       if(data){
@@ -80,8 +85,13 @@ dtOptions: DataTables.Settings = {};
         data: 'applicationName'
       },
       {
-        title: 'Application Name',
-        data: 'applicationName'
+        title: 'Domain',
+        data: 'domain'
+      },
+      {
+        title: 'Employment Type',
+        data: 'employmentType',
+      
       },
       {
         title: 'Option',

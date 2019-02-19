@@ -46,9 +46,11 @@ export class EditResourcesComponent implements OnInit {
   transitionPeriod;
   remarks;
   administratorAccess;
+ 
+  userId;
 
   applicationNameList=['SG -Singapore','CH - Chennai','BG - Bangalore'];
-  departmentList=['Trde','Cash','Channels'];
+  departmentList=['Trade','Cash','Channels'];
   Status=['Permanent','Vendor'];
   resourceClassList=['Automation','Manual'];
   locationCtryList=['KL -Kuala Lumpur','SG -Singapore','CH - Chennai','BG - Bangalore'];
@@ -60,7 +62,6 @@ export class EditResourcesComponent implements OnInit {
   CRTypeList=['Functional','Automatione'];
   nextResTypeList=['Functional','Automatione'];
   tredPeriodList=[ 'Year','Quarter'];
-
   constructor(private _location: Location,
     private fb: FormBuilder,
     private http: HttpClient,
@@ -100,6 +101,7 @@ export class EditResourcesComponent implements OnInit {
        dateOfHire:["",[Validators.required]],
        country:["",[Validators.required]],
         administratorAccess:["",[Validators.required]],
+        userId:["",[Validators]],
     })
     
     this.resourcesService.getResources(this.route.snapshot.params.id).subscribe((resources) => {
@@ -107,36 +109,12 @@ export class EditResourcesComponent implements OnInit {
       this.seteditResoucesValue(resources);
      });
 
-    //this.resourceID = this.editResoucesForm.get('resourceID').setValue("hhh");
-
-    // this.resourceID = this.editResoucesForm.get('resourceID').setValue(this.currentResources.resourceID);
-    // this.resourceName = this.editResoucesForm.get('resourceName').setValue(this.currentResources.resourceName);
-    // this.employmentType = this.editResoucesForm.get('employmentType').setValue(this.currentResources.employmentType);
-    //  this.resourceClass = this.editResoucesForm.get('resourceClass').setValue(this.currentResources.resourceClass);
-    // this.city = this.editResoucesForm.get('city').setValue(this.currentResources.city);
-    //  this.gender = this.editResoucesForm.get('gender').setValue(this.currentResources.gender);
-    // this.domain = this.editResoucesForm.get('domain').setValue(this.currentResources.domain);
-    //  this.role = this.editResoucesForm.get('role').setValue(this.currentResources.role);
-    // this.applicationName = this.editResoucesForm.get('applicationName').setValue(this.currentResources.applicationName);
-    //  this.retainRelease = this.editResoucesForm.get('retainRelease').setValue(this.currentResources.retainRelease);
-    // this.resourceManagerBankID = this.editResoucesForm.get('resourceManagerBankID').setValue(this.currentResources.resourceManagerBankID); 
-    //  this.financialDepartment = this.editResoucesForm.get('financialDepartment').setValue(this.currentResources.financialDepartment);
-    // this.resourceManagerName = this.editResoucesForm.get('resourceManagerName').setValue(this.currentResources.resourceManagerName); 
-    // this.currentResourceType = this.editResoucesForm.get('currentResourceType').setValue(this.currentResources.currentResourceType);
-    // this.nextYearResourceType = this.editResoucesForm.get('nextYearResourceType').setValue(this.currentResources.nextYearResourceType); 
-    // this.transitionPeriod = this.editResoucesForm.get('transitionPeriod').setValue(this.currentResources.transitionPeriod);
-    // this.remarks = this.editResoucesForm.get('remarks').setValue(this.currentResources.remarks); 
-    // this.dateOfHire = this.editResoucesForm.get('dateOfHire').setValue(this.currentResources.dateOfHire);
-    // this.country = this.editResoucesForm.get('country').setValue(this.currentResources.country);
-    //  this.administratorAccess = this.editResoucesForm.get('administratorAccess').setValue(this.currentResources.administratorAccess);
-  
-  
   }
 
   get f() { return this.editResoucesForm.controls; }
 
   seteditResoucesValue(resources){
-   console.log(resources.dateOfHire);
+   this.editResoucesForm.controls['userId'].setValue(resources.userId);
    this.editResoucesForm.controls['resourceID'].setValue(resources.resourceID);
    this.editResoucesForm.controls['resourceName'].setValue(resources.resourceName);
    this.editResoucesForm.controls['domain'].setValue(resources.domain);
@@ -157,28 +135,33 @@ export class EditResourcesComponent implements OnInit {
    this.editResoucesForm.controls['dateOfHire'].setValue(resources.dateOfHire);
    this.editResoucesForm.controls['country'].setValue(resources.country);
    this.editResoucesForm.controls['administratorAccess'].setValue(resources.administratorAccess);
-   
   }
 
   backClicked() {
     this._location.back()
   }
-
-  editResoucesdata() {
-   
-    this.editResoucesForm.value.dateOfHire = this.editResoucesForm.value.dateOfHire.toLocaleDateString();
-    // console.log(this.editResoucesForm.value.dateOfHire);
-    console.log(JSON.stringify(this.editResoucesForm));
+ 
+  editResoucesdata(f) {
     
+    this.editResoucesForm.value.dateOfHire = this.editResoucesForm.value.dateOfHire.toLocaleDateString();
 
-    this.resourcesService.editResources(this.editResoucesForm).subscribe(
+    //console.log(this.editResoucesForm.value.dateOfHire);
+   // console.log(JSON.stringify(this.editResoucesForm.value));
+  // let userId = "userId ="+this.route.snapshot.params.i;
+    let Form = JSON.stringify(this.editResoucesForm.value);
+    console.log(Form);
+    this.resourcesService.editResources(Form).subscribe(
       (response:any)=> {
-         console.log(response);
-        this.toastr.info('Record Created Sucessfully.');
+         console.log(response.data);
+        
+        this.toastr.info('Record Updated Sucessfully.');
+        $('#datatable-buttons').DataTable().ajax.reload();
          this.backClicked();
          },
       error => console.log(error)
     )
   }
+
+
 
 }

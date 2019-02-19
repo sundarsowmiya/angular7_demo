@@ -17,7 +17,9 @@ export class HeaderNavComponent implements OnInit {
    if (this.accountService.isLogged()) {
    this.resourceID = JSON.parse(localStorage.getItem('resourceID'));
     this.role = localStorage.getItem('role');
-    
+    if(this.role=='Yes'){
+      this.role ='Admin'
+    }
     } 
   }
   //resourceID = JSON.parse(localStorage.getItem('resourceID'));
