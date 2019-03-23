@@ -1,35 +1,140 @@
+<div class="row">
+  <!--Start Title -->
+  <div class="col-12">
+    <div class="page-title-box">
+      <div class="page-title-right">
+        <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item" [routerLinkActive]="['active']">
+            <a [routerLink]="['../../dashboard']">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item" [routerLinkActive]="['active']">
+            <a [routerLink]="['../resources']">{{titleHeading}}</a>
+          </li>
+          <li class="breadcrumb-item active">View Resources</li>
+        </ol>
+      </div>
+      <h4 class="page-title">
+        Resources
+        <a
+          [routerLink]="['../resources/add-app']"
+          data-toggle="modal"
+          class="btn btn-success btn-sm ml-3"
+          ><i class="mdi mdi-plus-circle mr-2"></i>Add New Resources
+        </a>
+      </h4>
+    </div>
+  </div>
+</div>
+<!--End Title -->
 
-                       <div class="row"><!--Start Title -->
-                            <div class="col-12">
-                                <div class="page-title-box">
-                                    <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"  [routerLinkActive]="['active']"><a [routerLink]="['../../dashboard']">Dashboard</a></li>
-                                            <li class="breadcrumb-item" [routerLinkActive]="['active']"><a [routerLink]="['../resources']">Resources</a></li>
-                                            <li class="breadcrumb-item active">View Resources</li>
-                                        </ol>
-                                    </div>
-                                    <h4 class="page-title">Resources
-                                            <a (click)="addData()" href="#"  data-toggle="modal" data-target="#add-new-task-modal" class="btn btn-success btn-sm ml-3">Add New Resources </a>
-                                    </h4>   
-                                </div>
-                            </div>
-                        </div><!--End Title -->   
-                        <div class="row"><!-- Start View Resource -->
-                            <div class="col-12">
-                                <div class="card"  >
-                                    <div class="card-body">
-                                    <table  datatable [dtOptions]="dtOptions"
-                                     [dtTrigger]="dtTrigger"
-                                       id="datatable-buttons"
-                                      class="table"
-                                       width="100%"></table>
-                                    </div> 
-                                </div>
-                            </div>
-                        </div><!-- END  View Resource-->
-                        <!-- add router Start -->
-                        
-                        <router-outlet></router-outlet>
-                        <!-- -->
-                        <!-- add router end  -->
+<div class="row">
+  <!-- Start View Resource -->
+  <spinner-component [active]="spinnerFlag"></spinner-component>
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div id="myModal"
+          class="modal fade"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Import Data</h4>
+                <button
+                  type="button"
+                  class="close "
+                  #closeBtn
+                  data-dismiss="modal"
+                  (click)="closeModal()"
+                  aria-hidden="true">
+                  ×
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <form
+                      [formGroup]="uploadResoucesForm"
+                      (ngSubmit)="uploadData(f)"
+                      #f="ngForm">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="File Upload">File Upload: </label><br />
+                          <input
+                            type="file"
+                            formControlName="uploadFileData"
+                            name="uploadFileData"
+                            id="uploadFileData"
+                            class="btn btn-light"
+                            (change)="onUploadChanged($event)"
+                            accept=".xlsx"
+                            multiple
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <button
+                          type="submit"
+                          [disabled]="isDisabled"
+                          class="btn btn-primary mb-4">
+                          Upload Resources
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-light"
+                  data-dismiss="modal">
+                  Close
+                </button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <div class="text-sm-right">
+          <button
+            type="button"
+            class="btn btn-light mb-2 mr-1"
+            data-toggle="modal"
+            data-target="#myModal"
+          >
+            <i class="mdi mdi-import"></i>Import
+          </button>
+          <button
+            type="button"
+            class="btn btn-light mb-2"
+            (click)="downloadtable()"
+          >
+            <i class="mdi mdi-download"></i> Export
+          </button>
+        </div>
+
+        <table
+          id="basic-datatable"
+          class="table table-bordered table-centered dt-responsive "
+          datatable
+          [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"
+          id="datatable-buttons"
+          width="100%"
+        ></table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END  View Resource-->
+
+<!-- add router Start -->
+<router-outlet></router-outlet>
+<!-- add router end  -->

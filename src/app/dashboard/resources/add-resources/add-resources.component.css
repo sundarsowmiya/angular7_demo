@@ -1,3 +1,40 @@
 .custom-padd-12{
     padding-top:30px;
 }
+/* .md-custom-calander{
+margin-top: -7px;
+    width: 350px;
+    border: 0px;
+} */
+span .ui-calendar .ui-inputtext {
+    width: 350px !important;
+    margin-top: -7px  !important;
+    border: 0px  !important;
+ }
+ .modal-backdrop.fade{
+    opacity: 0.5;
+}
+
+/* #ui-inputtext {
+    width: 250px !important;
+    margin-top: -7px  !important;
+    border: 0px  !important;
+} */
+:host ::ng-deep .ui-multiselected-item-token,
+        :host ::ng-deep .ui-multiselected-empty-token {
+            padding: 2px 4px;
+            margin: 0 0.286em 0 0;
+            display: inline-block;
+            vertical-align:middle;
+            height: 1.857em;
+        }
+
+        :host ::ng-deep .ui-multiselected-item-token {
+            background: #007ad9;
+            color: #ffffff;
+        }
+
+        :host ::ng-deep .ui-multiselected-empty-token {
+            background: #d95f00;
+            color: #ffffff;
+        }

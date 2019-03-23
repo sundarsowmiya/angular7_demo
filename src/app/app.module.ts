@@ -16,10 +16,13 @@ import { ResourcesComponent } from './dashboard/resources/resources.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { AddResourcesComponent } from './dashboard/resources/add-resources/add-resources.component';
 
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { ToastrModule } from 'ngx-toastr';
 import { EditResourcesComponent } from './dashboard/resources/edit-resources/edit-resources.component';
 import { DeleteResourcesComponent } from './dashboard/resources/delete-resources/delete-resources.component';
+import {CalendarModule} from 'primeng/primeng';
+import {DropdownModule} from 'primeng/dropdown';
+import { SpinnerComponent } from './dashboard/components/spinner/spinner.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +35,8 @@ import { DeleteResourcesComponent } from './dashboard/resources/delete-resources
     DashboardReportsComponent,
     AddResourcesComponent,
     EditResourcesComponent,
-    DeleteResourcesComponent
+    DeleteResourcesComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -41,10 +45,12 @@ import { DeleteResourcesComponent } from './dashboard/resources/delete-resources
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    
-    OwlDateTimeModule, 
-    OwlNativeDateTimeModule,
-    ToastrModule.forRoot()
+    CalendarModule,
+   
+    DropdownModule,
+    //FileUploadModule,
+    ToastrModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

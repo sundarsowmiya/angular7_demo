@@ -12,11 +12,11 @@ const httpHeaders ={
     providedIn:'root'
 })
 export class LoginService{
-    loginUrl=config.gServiceUrl+"/user/login";
+    loginUrl=config.gServiceUrl+"/login";
     constructor(private http:HttpClient){
     }
     
     loginCheck(data):Observable<LoginType[]>{
-        return this.http.post<LoginType[]>(this.loginUrl+"?userId="+ data.userName+"&password="+data.password,data,httpHeaders)
+        return this.http.post<LoginType[]>(this.loginUrl,data,httpHeaders)
     }
 }

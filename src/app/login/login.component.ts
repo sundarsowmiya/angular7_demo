@@ -40,10 +40,10 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl("/dashboard");
           this.toastr.info('Welcome to TnC Dashboard Reports.');
          }else{
-          this.toastr.error('Not a Admin');
+          this.toastr.error('Not an Admin');
          }
     } else {
-      this.toastr.error('Failure Invalid username');
+      this.toastr.error('Invalid username or password');
     }
    }); 
    }

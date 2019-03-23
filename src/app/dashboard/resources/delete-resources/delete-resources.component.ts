@@ -36,11 +36,11 @@ export class DeleteResourcesComponent implements OnInit {
     this.resourcesService.deleteresources(this.route.snapshot.params.id).subscribe(
       (response:any)=> {
         if (response.code == 'DL003' || response.code== "" || response.code== null) {
-          this.toastr.error('Failure to Delet.');
+          this.toastr.error('Failure to Delete user '+this.route.snapshot.params.id);
        }
        else {
         this.backClicked();
-        this.toastr.info('Record Deleted.');
+        this.toastr.info('Resource '+this.route.snapshot.params.id+ ' deleted');
        $('#datatable-buttons').DataTable().ajax.reload();
        }
         

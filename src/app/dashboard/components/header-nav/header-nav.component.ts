@@ -11,17 +11,20 @@ export class HeaderNavComponent implements OnInit {
   resourceID:string;
   role:string;
   pushM:boolean=true;
+  resourceName:string;
   constructor(private router: Router,private accountService:AccountService) { }
 
   ngOnInit() {
    if (this.accountService.isLogged()) {
    this.resourceID = JSON.parse(localStorage.getItem('resourceID'));
-    this.role = localStorage.getItem('role');
+   this.resourceName = localStorage.getItem('resourceName');
+   this.role = localStorage.getItem('role');
     if(this.role=='Yes'){
       this.role ='Admin'
     }
     } 
   }
+
   //resourceID = JSON.parse(localStorage.getItem('resourceID'));
 
   userLogout(){
