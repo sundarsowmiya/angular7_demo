@@ -6,5 +6,5 @@ import * as $ from 'jquery';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ui-dashboard';
+  title = 'scb-ui-dashboard';
 }
