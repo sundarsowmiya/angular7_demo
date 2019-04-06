@@ -25,6 +25,7 @@ const routes: Routes = [
 			{path:'edit-resources/:id',component:EditResourcesComponent},
 			{path:'delete-resources/:id',component:DeleteResourcesComponent}
 		]},
+		{path:'profile', component:DashboardReportsComponent},
 	]},
 	
 ];

@@ -23,6 +23,9 @@ import {CalendarModule} from 'primeng/primeng';
 import {DropdownModule} from 'primeng/dropdown';
 import { SpinnerComponent } from './dashboard/components/spinner/spinner.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ResourceDataComponent } from './dashboard/resource-data/resource-data.component';
+import { ResourceNewDataComponent } from './dashboard/resource-new-data/resource-new-data.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +39,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     AddResourcesComponent,
     EditResourcesComponent,
     DeleteResourcesComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ResourceDataComponent,
+    ResourceNewDataComponent
   ],
   imports: [
     BrowserModule,

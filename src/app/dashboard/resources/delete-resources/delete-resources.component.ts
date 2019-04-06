@@ -15,6 +15,9 @@ export class DeleteResourcesComponent implements OnInit {
   DeleteResourcesForm;
   dtOptions;
   dataTable:any;
+  administratorAccess;
+  adminUser;
+  adminAccess;
   constructor(
     private _location: Location, 
     private route: ActivatedRoute,
@@ -28,8 +31,15 @@ export class DeleteResourcesComponent implements OnInit {
     }
   
   ngOnInit() {
+    this.resourcesService.getResources(this.route.snapshot.params.id).subscribe((response:any) => {
+      this.adminUser =response.administratorAccess;
+     if(this.adminUser == "Yes"){
+       this.adminAccess ='Are you sure you want to delete Admin User?'
+     }else{
+      this.adminAccess ='Are you sure you want to delete?'
+     }
+    });
 
-    
   }
 
   deleteResources(){

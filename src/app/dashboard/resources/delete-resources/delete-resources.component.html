@@ -10,9 +10,9 @@
                     <h3 class="modal-title"><i class="mdi mdi-delete"></i> Delete Resources</h3>
                     <button type="button" (click)="backClicked()" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 </div>
-                <div class="modal-body">
-                    Are you sure you want to delete?
-                </div>
+                <div class="modal-body">{{adminAccess}}</div>
+                <!-- <div class="modal-body" *ngIf="admin =='Yes'; else elseBlock" > Are you sure you want to delete <b>Admin</b> User?</div>
+                     <ng-template #elseBlock  class="modal-body">Are you sure you want to delete? </ng-template> -->
                 <div class="modal-footer">
                     <button type="button" (click)="backClicked()" class="btn default" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary modal-event">Delete</button>

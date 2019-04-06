@@ -31,7 +31,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="resourceID">Resource ID </label><span style="color: red">*</span>
-                                    <input type="text" formControlName="resourceID" id="resourceID" class="form-control" required  />
+                                    <input readonly type="text" formControlName="resourceID" id="resourceID" class="form-control" required  />
                                     <!-- <div class="alert alert-danger" *ngIf="editResoucesForm.controls.resourceID.errors">
                                         <div *ngIf="editResoucesForm.controls.resourceID.errors.required">Resource ID Required</div>
                                     </div> -->
@@ -51,16 +51,17 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="name">Application Name</label><span style="color: red">*</span>
-                                    <select  class="form-control" formControlName="applicationName" >
-                                        <option value="" disabled>Choose a Application Name</option>
-                                        <option *ngFor="let applicationName of applicationNameList; let i = index" [value]="applicationName">{{applicationName}}</option>
-                                    </select>
-                                    <!-- <div class="alert alert-danger" *ngIf="editResoucesForm.controls.applicationName.errors">
-                                        <div *ngIf="editResoucesForm.controls.applicationName.errors.required">Application Name Required</div>
-                                    </div> -->
-                                </div>
-                            </div>
+                                       <label for="resourceName">Application Name</label>
+                                            <ng-multiselect-dropdown  
+                                            [settings]="dropdownSettings" 
+                                            [placeholder]="'Application Name'"
+                                             [data]="applicationNameLists"
+                                             (onSelect)="onItemSelect($event)"
+                                             (onSelectAll)="onSelectAll($event)"
+                                             formControlName="applicationName">
+                                              </ng-multiselect-dropdown>
+                                   </div>
+                               </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="gender">Gender</label>
@@ -115,7 +116,7 @@
                                 <div class="content-section implementation">
                                             <div class="ui-g ui-fluid">
                                                 <div class="ui-g-12 ui-md-12 ">
-                                                        <div class="form-group"> {{dateOfHire | json}}
+                                                        <div class="form-group"> 
                                                         <label for="name">Date Of Hire </label><br> 
                                                         <p-calendar class="ng-tns-c3-3" formControlName="dateOfHire" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="Date Of Hire"></p-calendar>
                                                     </div>
@@ -236,7 +237,7 @@
                         <div class="row">
                                 <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="gender">Transition Year</label>
+                                            <label for="gender">Transition Year</label>{{transitionYear | json}}
                                             <select class="form-control" id="transitionYear" formControlName="transitionYear" name="transitionYear">
                                                 <option value="" disabled>Choose a Transition Year</option>
                                                 <option *ngFor="let transitionYear of tredYearList; let i = index;" [value]="transitionYear">{{transitionYear}}</option>

@@ -200,8 +200,8 @@ onItemSelect(items: any){
 
     this.submitted = true;
  
-     this.addResoucesForm.value.dateOfHire = new DatePipe('en-US').transform(this.addResoucesForm.value.dateOfHire, 'dd/MM/yyyy')
-   
+     this.addResoucesForm.value.dateOfHire = new DatePipe('en-US').transform(this.addResoucesForm.value.dateOfHire, 'MM/dd/yyyy')
+   console.log(this.addResoucesForm.value.dateOfHire );
    // this.addResoucesForm.value.dateOfHire = this.addResoucesForm.value.dateOfHire.toLocaleDateString();
     if (this.addResoucesForm.invalid) {
       return;

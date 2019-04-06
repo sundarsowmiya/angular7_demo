@@ -38,7 +38,7 @@ export class ResourcesService{
     resourcesAPIurlDelete: any = config.gServiceUrl+"/user/delete";
     resourcesAPIurlGet: any = config.gServiceUrl+"/user";
     resourcesAPIurlEdit: any = config.gServiceUrl+"/user/edit";
-    resourcesAPIurlGetall: any = config.gServiceUrl+'/users';
+    resourcesAPIurlGetall: any = config.gServiceUrl+"/users";
     resourcesAPIdocurl:any = config.gServiceUrl+'/user/uploadexcelfile'; 
     resourcesAPIurlDropDownList: any = config.gServiceUrl+'/dropdownlist';
     resourcesAPIduplicate:any = config.gServiceUrl+'/user/validate';
@@ -65,6 +65,8 @@ export class ResourcesService{
     getResourcesall(): Observable<ResourcesTypes[]>{
         return this.http.get<ResourcesTypes[]>(this.resourcesAPIurlGetall);
     }
+
+
 
     uploadDocument(data): Observable<FormData[]> {
 

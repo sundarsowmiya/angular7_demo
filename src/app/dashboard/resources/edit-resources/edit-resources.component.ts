@@ -29,7 +29,7 @@ export class EditResourcesComponent implements OnInit {
   applicationName;
   gender;
   domain:string;
-  ///domainList: string[]=['Trade','Cash','Channels'];
+ 
   employmentType;
   retainRelease;
   resourceClass;
@@ -47,7 +47,7 @@ export class EditResourcesComponent implements OnInit {
   administratorAccess;
   userId;
   dropDownlist;
-  applicationNameList:Array<any>[];
+  applicationNameLists:Array<any>[];
    departmentList:Array<any>[];
    status:Array<any>[];
    resourceClassList:Array<any>[];
@@ -61,7 +61,12 @@ export class EditResourcesComponent implements OnInit {
    nextResTypeList:Array<any>[];
    tredPeriodList:Array<any>[];
    tredYearList:Array<any>[];
+   dateOfHire;
    buttontype= false;
+   dropdownList = [];
+   onItemSelected;
+   onSelectedAll;
+   dropdownSettings = {};
   constructor(private _location: Location,
     private fb: FormBuilder,
     private http: HttpClient,
@@ -77,7 +82,17 @@ export class EditResourcesComponent implements OnInit {
    
   ngOnInit() {
    
-  
+    this.dropdownList = [];
+    this.applicationName = [];
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -104,7 +119,7 @@ export class EditResourcesComponent implements OnInit {
         transitionPeriod:["",[Validators.required]],
         transitionYear:["",[Validators.required]],
        remarks:["",[Validators.required]], 
-       dateOfHire:[""],
+       dateOfHire:["",[Validators.required]],
        country:["",[Validators.required]],
         administratorAccess:["",[Validators.required]],
         userId:["",[Validators]],
@@ -116,7 +131,7 @@ export class EditResourcesComponent implements OnInit {
      });
      
        this.resourcesService.getDropDownlist().subscribe((response:any) => {
-        this.applicationNameList =response[0].applicationNameList;
+        this.applicationNameLists =response[0].applicationNameList;
         this.departmentList =response[0].departmentList;
         this.status =response[0].statusList;
         this.resourceClassList =response[0].resourceClassList;
@@ -150,7 +165,7 @@ export class EditResourcesComponent implements OnInit {
   get f() { return this.editResoucesForm.controls; }
 
   seteditResoucesValue(resources){  
-   console.log(resources);
+   console.log(resources.dateOfHire);
    this.editResoucesForm.controls['userId'].setValue(resources.userId);
    this.editResoucesForm.controls['resourceID'].setValue(resources.resourceID);
    this.editResoucesForm.controls['resourceName'].setValue(resources.resourceName);
@@ -176,12 +191,19 @@ export class EditResourcesComponent implements OnInit {
 
   }
 
+  onItemSelect(items: any){
+    console.log(this.applicationName,"All comming here");
+  }
+  onSelectAll(items: any) {
+      this.onSelectedAll = items;
+    }
+
   backClicked() {
     this._location.back()
   }
   editResoucesdata(f) {
    
-   this.editResoucesForm.value.dateOfHire = new DatePipe('en-US').transform(this.editResoucesForm.value.dateOfHire, 'dd/MM/yyyy')
+   this.editResoucesForm.value.dateOfHire = new DatePipe('en-US').transform(this.editResoucesForm.value.dateOfHire, 'MM/dd/yyyy')
    console.log(this.editResoucesForm.value);
    let Form = JSON.stringify(this.editResoucesForm.value);
     this.resourcesService.editResources(Form).subscribe(

@@ -14,12 +14,9 @@ span .ui-calendar .ui-inputtext {
  .modal-backdrop.fade{
     opacity: 0.5;
 }
-
-/* #ui-inputtext {
-    width: 250px !important;
-    margin-top: -7px  !important;
-    border: 0px  !important;
-} */
+:host ::ng-deep .ui-fluid .ui-inputtext{
+    border: 1px solid #dee2e6 !important;
+}
 :host ::ng-deep .ui-multiselected-item-token,
         :host ::ng-deep .ui-multiselected-empty-token {
             padding: 2px 4px;
@@ -37,4 +34,7 @@ span .ui-calendar .ui-inputtext {
         :host ::ng-deep .ui-multiselected-empty-token {
             background: #d95f00;
             color: #ffffff;
+        }
+        :host ::ng-deep .dropdown-btn {
+            border: 1px solid #dee2e6 !important;
         }

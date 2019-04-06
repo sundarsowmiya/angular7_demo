@@ -1,3 +1,4 @@
+
 <div class="row">
   <!--Start Title -->
   <div class="col-12">
@@ -63,8 +64,7 @@
                       <div class="col-md-12">
                         <div class="form-group">
                           <label for="File Upload">File Upload: </label><br />
-                          <input
-                            type="file"
+                          <input type="file"
                             formControlName="uploadFileData"
                             name="uploadFileData"
                             id="uploadFileData"
@@ -83,6 +83,8 @@
                           Upload Resources
                         </button>
                       </div>
+
+
                     </form>
                   </div>
                 </div>
@@ -101,11 +103,61 @@
           <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-
-        <div class="text-sm-right">
+        <form [formGroup]="searchResoucesForm" (ngSubmit)="searchresouces()" >
+          <div class="row">
+            <!-- <div class="col-md-3">
+                 <div class="form-group">
+                        <label for="resourceName">Search Application Name</label>
+                             <ng-multiselect-dropdown  
+                             [settings]="dropdownSettings" 
+                             [placeholder]="'Application Name'"
+                              [data]="applicationNameLists"
+                              (onSelect)="onItemSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              formControlName="applicationName">
+                           </ng-multiselect-dropdown>
+                    </div>
+                </div>
+  
+                <div class="col-md-3">
+                  <div class="form-group">
+                         <label for="domainName">Search Domain Name</label>
+                              <ng-multiselect-dropdown  
+                              [settings]="domaindropdownSettings" 
+                              [placeholder]="'Domain'"
+                               [data]="domainNameLists"
+                               (onSelect)="domainonItemSelect($event)"
+                               (onSelectAll)="domainonSelectAll($event)"
+                               formControlName="domainName">
+                            </ng-multiselect-dropdown>
+                     </div>
+                 </div>
+  
+                 <div class="col-md-2">
+                  <div class="form-group">
+                         <label for="resourcesid">Search Resources Id</label>
+                              <ng-multiselect-dropdown  
+                              [settings]="resourcesdropdownSettings" 
+                              [placeholder]="'Resources Id'"
+                               [data]="resourcesNameLists"
+                               (onSelect)="resourcesItemSelect($event)"
+                               (onSelectAll)="resourcesonSelectAll($event)"
+                               formControlName="resourcesid">
+                            </ng-multiselect-dropdown>
+                     </div>
+                 </div> -->
+                 <div class="col-md-4" >
+                 
+                  
+                </div>
+            </div>
+           
+        </form>
+        <div class="text-sm-right cust-padd"><br>
+         
           <button
             type="button"
-            class="btn btn-light mb-2 mr-1"
+            class="btn btn-light mb-1 mr-1"
             data-toggle="modal"
             data-target="#myModal"
           >
@@ -113,22 +165,54 @@
           </button>
           <button
             type="button"
-            class="btn btn-light mb-2"
+            class="btn btn-light mb-1"
             (click)="downloadtable()"
           >
             <i class="mdi mdi-download"></i> Export
           </button>
         </div>
+        <!-- width: 1000px; overflow-x: scroll; display: block; -->
+        <table datatable [dtOptions]="dtOptions" class="table table-centered table-striped dt-responsive nowrap w-30 no-footer  dtr-inline collapsed row-border hover" style=" margin-top: 59px !important;">
+            <tfoot style="top:0px; position:absolute;">
+              <tr>
+                <th><input class="form-control" type="text" placeholder="Search Domain" name="search-domain"/></th>
+                <th><input style="display: none;" type="text" placeholder="Search resource name" name="search-resource-name"/></th>
+                <th><input class="form-control" type="text" placeholder="Search Resource Id" name="search-resource-id"/></th>
+                <th><input  class="form-control"  type="text" placeholder="Search Application Name" name="search-application-name"/></th>
+                <th><input  style="visibility: hidden;" type="text" placeholder="Search last name" name="search-employment-type"/></th>
+                <th><input  style="visibility: hidden;" type="text" placeholder="Search last name" name="search-retain-release"/></th>
+                <th><input  style="display: none;" type="text" placeholder="Search last name" name="search-resource-class"/></th>
+                <th><input  style="display: none;" type="text" placeholder="Search last name" name="search-date-of-hire"/></th>
+                <th><input  style="display: none;" type="text" placeholder="Search last name" name="search-role"/></th>
+                <th><input  style="display: none;" type="text" placeholder="Search last name" name="search-resource-manager-bankid"/></th>
+                <th><input  style="display: none;" type="text" placeholder="Search last name" name="search-resource-Manager-name"/></th>
+                <th><input  style="display: none;" type="text" placeholder="Search last name" name="search-financial-department"/></th>
+                <th><input  style="display: none;" type="text" placeholder="Search last name" name="search-city"/></th>
+                <th><input  style="display: none;" type="text" placeholder="Search last name" name="search-country"/></th>
+                <th><input  style="display: none;" type="text" placeholder="Search last name" name="search-current-resource-type"/></th>
+                <th><input  style="display: none;" type="text" placeholder="Search last name" name="search-nextYear-Resource-type"/></th>
+                <th><input  style="display: none;" type="text" placeholder="Search last name" name="search-transition-period"/></th>
+                <th><input  style="display: none;" type="text" placeholder="Search last name" name="search-transition-year"/></th>
+                <th><input  style="display: none;" type="text" placeholder="Search last name" name="search-remarks"/></th>
+                <th><input  style="display: none;" type="text" placeholder="Search last name" name="search-administrator-access"/></th>
+                <th><input  style="display: none;" type="text" placeholder="Search last name" name="search-resource-id"/></th>
+              </tr>
+            </tfoot>
+          </table>
+        
+        <!-- <div id="table-place">
+            <table
+            id="basic-datatable"           
+            datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+            id="datatable-buttons"
+            width="100%"
+          ></table>
 
-        <table
-          id="basic-datatable"
-          class="table table-bordered table-centered dt-responsive "
-          datatable
-          [dtOptions]="dtOptions"
-          [dtTrigger]="dtTrigger"
-          id="datatable-buttons"
-          width="100%"
-        ></table>
+        </div> -->
+
+       
       </div>
     </div>
   </div>
@@ -138,3 +222,5 @@
 <!-- add router Start -->
 <router-outlet></router-outlet>
 <!-- add router end  -->
+
+<!-- class="table table-centered table-striped dt-responsive nowrap w-30 dataTable no-footer dtr-inline collapsed" -->
